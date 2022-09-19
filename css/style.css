@@ -1,0 +1,30 @@
+body{
+	background-color:  indianred;
+}
+
+h1{
+	font-family: Playfair Display;
+	font-size: 70px;
+	color:  whitesmoke;
+	text-align:  center;
+}
+h2{
+	font-family: Playfair Display;
+	font-size: 37px;
+	font-style: italic;
+	color: darkred;
+	text-align: center;
+}
+h3{
+	font-family: EBGaramond;
+	font-size:  37 px;
+	color:  black;
+	text-align: center;
+}
+
+p{
+	font-family:  EBGaramond;
+	font-size: 20px;
+	color: black;
+	text-align: right;
+}

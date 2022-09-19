@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Misery Registry</title>
+  <link rel="stylesheet" href = "../css/style.css">
+  <script src = "../js/codigo.js"></script>
+</head>
+<body>
+  <h1>LITOST</h1>
+  <h2>"The Agony and Torment born from our own Misery."</h2>
+  <h3>
+  Are you ready to Begin?<br>
+  <input type = "button" onclick= "popup()" value = "Yes"> 
+  <input type = "button" onclick= "popup2()" value = "No"> <br>
+  </h3>
+  <p>
+  Do you want to know how many thoughts you have on the realm of Misery? <br>
+  <input type = "button" onclick= "miseryThoughtsCalculator()" value = "Calculate my Thoughts"><br>
+  </p>
+
+  <form action="../php/welcome.php" method="post">
+  Create an Account<br>
+  Name: <input type="text" name="nameo"><br>
+  Last Name: <input type="text" name="lastname"><br>
+  <br>
+  E-mail: <input type="text" name="email"><br>
+  <input type="submit" value ="Enter Misery">
+  </form>
+
+  <p><br>
+    <form action="../php/database.php" method="post">
+  Enter Your Player Data<br>
+  PlayerID: <input type="text" name="id"><br>
+  Name: <input type="text" name="name"><br>
+  Score: <input type="text" name="score"><br>
+  Level: <input type="text" name="level"><br>
+  <input type="submit" value ="Enter">
+  </form>
+</p>
+<h1>See you at the Moshpit!</h1>
+</body>
+</html>
