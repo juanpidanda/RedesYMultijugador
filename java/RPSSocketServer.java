@@ -7,43 +7,29 @@ import java.net.Socket;
 import java.util.Scanner;
 import java.util.Random;
 
-/**
-* This class implements java Socket server
-* @author pankaj
-*
-*/
-public class SocketServerExample {
-
+public class RPSSocketServer {
 //static ServerSocket variable
 private static ServerSocket server;
 //socket server port on which it will listen
 private static int port = 9876;
-
 public static void main(String args[]) throws IOException, ClassNotFoundException{
 	RPSGame();
 }
 public static void RPSGame()throws IOException, ClassNotFoundException{
 	server = new ServerSocket(port);
 	//User Variables
-	//Scanner userInput = new Scanner(System.in);
 	String userRPSDecision = "";
-
 	//Server Variables
 	boolean continuePlaying = true;
 	String serverRPSDecision = "";
 	String winner = "";
-
-
 	while(continuePlaying){
 		System.out.println("Waiting for the client request");
 		//creating socket and waiting for client connection
 		Socket clientSocketInServer = server.accept();
-
-
 		//read from socket to ObjectInputStream object
 		ObjectInputStream ois = new ObjectInputStream(clientSocketInServer.getInputStream());
 		userRPSDecision = (String) ois.readObject();
-
 		serverRPSDecision = RandomRPSID();
 		System.out.println("Randomizer selected = " + serverRPSDecision);
 		//create ObjectOutputStream object
@@ -51,8 +37,6 @@ public static void RPSGame()throws IOException, ClassNotFoundException{
 		oos.writeObject(serverRPSDecision);
 		winner = RPSWinnerSelector(userRPSDecision, serverRPSDecision);
 		oos.writeObject(winner);
-
-		
 		//close resources
 		ois.close();
 		oos.close();
@@ -60,8 +44,9 @@ public static void RPSGame()throws IOException, ClassNotFoundException{
 		continuePlaying = false;
 		}
 		System.out.println("Shutting down Socket server!!");
-	server.close();
+		server.close();
 }
+//Funcion para setear piedra, papel o tijera para el server mediante un random
 public static String RandomRPSID(){
 	Random random = new Random();
 	Integer serverRandomRPSID;
@@ -80,6 +65,7 @@ public static String RandomRPSID(){
 	}
 	return randomToString;
 }
+//Funcion que compara la decision del usuario y la del servidor para dar con el ganador
 public static String RPSWinnerSelector(String userDecision, String serverDecision){
 	System.out.println("Entro a RPSWinnerSelector\n " + " User Decision: " + userDecision + "\n Server Decision: " + serverDecision);
 	if(userDecision.equals(serverDecision)){
@@ -118,38 +104,4 @@ public static String RPSWinnerSelector(String userDecision, String serverDecisio
 	}
 	return "problem getting the winner.";
 }
-/*Codigo de Ejemplo
-public static void main(String args[]) throws IOException, ClassNotFoundException{
-//create the socket server object
-server = new ServerSocket(port);
-//keep listens indefinitely until receives 'exit' call or program terminates
-while(true){
-System.out.println("Waiting for the client request");
-//creating socket and waiting for client connection
-Socket socket = server.accept();
-//read from socket to ObjectInputStream object
-ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-
-//convert ObjectInputStream object to String
-String message = (String) ois.readObject();
-System.out.println("Message Received: " + message);
-//create ObjectOutputStream object
-ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-//write object to Socket
-oos.writeObject("Hi Client "+message);
-
-
-//close resources
-ois.close();
-oos.close();
-socket.close();
-//terminate the server if client sends exit request
-if(message.equalsIgnoreCase("exit")) break;
-}
-System.out.println("Shutting down Socket server!!");
-//close the ServerSocket object
-server.close();
-}
-*/
-
 }
